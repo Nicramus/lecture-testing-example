@@ -1,5 +1,6 @@
 package com.globallogic.testing.car.api;
 
+import com.globallogic.testing.car.api.model.Car;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -20,9 +21,14 @@ public class CarEndpoint {
     @Autowired
     private CarService carService;
 
-    @GetMapping(path = "/findcarbyname", produces = MediaType.TEXT_PLAIN_VALUE)
-    public ResponseEntity<Object> getCarByName(@RequestParam String manufacture, @RequestParam String model) {
+    @RequestMapping(path = "/findcarbyname", produces = MediaType.TEXT_PLAIN_VALUE)
+    public ResponseEntity<Car> getCarByName(@RequestParam String manufacture, @RequestParam String model) {
         return  ResponseEntity.ok().body(carService.getCar(manufacture, model));
+    }
+
+    @RequestMapping(path = "/hi", produces = MediaType.TEXT_PLAIN_VALUE)
+    public ResponseEntity<String> getCar() {
+        return ResponseEntity.ok().body("");
     }
 
 }
